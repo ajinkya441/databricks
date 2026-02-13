@@ -4,11 +4,12 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'project1_dabs/**' # depending on the project to deploy
 
 jobs:
   deploy_to_dev:
     name: "Deploy Bundle (DEV)"
-    if: contains(github.event.head_commit.modified, 'project1_dabs/')
     runs-on: ubuntu-latest
     
     steps:
@@ -26,7 +27,7 @@ jobs:
 
       - uses: databricks/setup-cli@main
       
-      - working-directory: ./project1_dabs
+      - working-directory: ./project1_dabs # depending on the project to deploy
         env:
           DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID_WS_DEV }}
           DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET_WS_DEV }}
