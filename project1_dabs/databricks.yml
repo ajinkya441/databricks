@@ -34,22 +34,22 @@ targets:
     mode: development
     default: true
     workspace:
-      # host: https://dbc-50af0417-17a9.cloud.databricks.com  # Change to dev URL
+      host: https://dbc-50af0417-17a9.cloud.databricks.com  # Change to dev URL
       # We explicitly deploy to /Workspace/Users/<username> to make sure we only have a single copy.
       root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}
     variables:
       catalog: workspace
       schema: schema_dev
-      # warehouse_id: <warehouse_id> # dev
+      warehouse_id: 870fb126167bb7a9 # dev
   prod:
     mode: production
     workspace:
-      # host: https://dbc-50af0417-17a9.cloud.databricks.com  # Change to prod URL
+      host: https://dbc-50af0417-17a9.cloud.databricks.com  # Change to prod URL
       root_path: /Workspace/Shared/.bundle/${bundle.name}/${bundle.target}
     variables:
       catalog: workspace
       schema: schema_prod
-      # warehouse_id: <warehouse_id> # prod
+      warehouse_id: 870fb126167bb7a9 # prod
     permissions:
-      - user_name: ${env.USERNAME}
+      - user_name: ${workspace.current_user.userName} # user access
         level: CAN_MANAGE
