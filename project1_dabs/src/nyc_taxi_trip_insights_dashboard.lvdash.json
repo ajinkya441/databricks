@@ -1,0 +1,156 @@
+{
+  "datasets": [
+    {
+      "catalog": "workspace",
+      "displayName": "nyctaxi",
+      "name": "a11c66fb",
+      "queryLines": [
+        "SELECT * FROM nyctaxi"
+      ],
+      "schema": "schema_dev"
+    }
+  ],
+  "pages": [
+    {
+      "displayName": "Page1",
+      "layout": [
+        {
+          "position": {
+            "height": 6,
+            "width": 6,
+            "x": 0,
+            "y": 0
+          },
+          "widget": {
+            "name": "72da3b89",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "a11c66fb",
+                  "disaggregated": false,
+                  "fields": [
+                    {
+                      "expression": "`trip_distance`",
+                      "name": "trip_distance"
+                    },
+                    {
+                      "expression": "COUNT(`*`)",
+                      "name": "count(*)"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "encodings": {
+                "color": {
+                  "displayName": "Trip Distance",
+                  "fieldName": "trip_distance",
+                  "legend": {
+                    "position": "right"
+                  },
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "x": {
+                  "displayName": "Trip Distance",
+                  "fieldName": "trip_distance",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "displayName": "Trip Count",
+                  "fieldName": "count(*)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Trip Distance Distribution"
+              },
+              "version": 3,
+              "widgetType": "histogram"
+            }
+          }
+        },
+        {
+          "position": {
+            "height": 6,
+            "width": 6,
+            "x": 6,
+            "y": 0
+          },
+          "widget": {
+            "name": "52aee85f",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "a11c66fb",
+                  "disaggregated": true,
+                  "fields": [
+                    {
+                      "expression": "`trip_distance`",
+                      "name": "trip_distance"
+                    },
+                    {
+                      "expression": "`fare_amount`",
+                      "name": "fare_amount"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "encodings": {
+                "x": {
+                  "displayName": "Trip Distance",
+                  "fieldName": "trip_distance",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "displayName": "Fare Amount",
+                  "fieldName": "fare_amount",
+                  "format": {
+                    "abbreviation": "none",
+                    "currencyCode": "USD",
+                    "decimalPlaces": {
+                      "places": 2,
+                      "type": "exact"
+                    },
+                    "type": "number-currency"
+                  },
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Trip Distance vs Fare Amount"
+              },
+              "version": 3,
+              "widgetType": "scatter"
+            }
+          }
+        }
+      ],
+      "layoutVersion": "GRID_V1",
+      "name": "e67854d9",
+      "pageType": "PAGE_TYPE_CANVAS"
+    }
+  ],
+  "uiSettings": {
+    "applyModeEnabled": false,
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    }
+  }
+}

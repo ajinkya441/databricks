@@ -1,0 +1,14 @@
+resources:
+  jobs:
+    setup_tables_job:
+      name: setup_tables_job
+      description: Creates tables in dev or prod based on environment
+      
+      tasks:
+        - task_key: create_tables
+          notebook_task:
+            notebook_path: ../src/setup_tables.ipynb  # Path to your setup notebook
+            base_parameters:
+              catalog: ${var.catalog}
+              schema: ${var.schema}
+              environment: ${bundle.target}  # Passes 'dev' or 'prod'
