@@ -1,49 +1,49 @@
-name: prod deployment
+# name: prod deployment
 
-on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'project1_dabs/**' # depending on the project to deploy
+# on:
+#   push:
+#     branches:
+#       - main
+#     paths:
+#       - 'project1_dabs/**' # depending on the project to deploy
 
-jobs:
-  deploy_to_prod:
-    name: "Deploy Bundle (PROD)"
-    runs-on: ubuntu-latest
+# jobs:
+#   deploy_to_prod:
+#     name: "Deploy Bundle (PROD)"
+#     runs-on: ubuntu-latest
     
-    steps:
-      - uses: actions/checkout@v4
+#     steps:
+#       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-          cache: pip
+#       - uses: actions/setup-python@v5
+#         with:
+#           python-version: "3.11"
+#           cache: pip
 
-      - name: Install
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install uv
+#       - name: Install
+#         run: |
+#           python -m pip install --upgrade pip
+#           python -m pip install uv
 
-      - uses: databricks/setup-cli@main
+#       - uses: databricks/setup-cli@main
       
-      - working-directory: ./project1_dabs # depending on the project to deploy
-        env:
-          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST_DEV }}
-          DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID_WS_DEV }}
-          DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET_WS_DEV }}
-          WAREHOUSE_ID: ${{ secrets.WAREHOUSE_ID_DEV }}
-          USERNAME: ${{ secrets.USERNAME }}
-          DATABRICKS_BUNDLE_ENV: prod
-        run: |
-          # databricks bundle validate -t prod \
-          #    --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID_WS_DEV }}" \
-          #    --var="warehouse_id=${{ secrets.WAREHOUSE_ID_DEV }}"
+#       - working-directory: ./project1_dabs # depending on the project to deploy
+#         env:
+#           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST_DEV }}
+#           DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID_WS_DEV }}
+#           DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET_WS_DEV }}
+#           WAREHOUSE_ID: ${{ secrets.WAREHOUSE_ID_DEV }}
+#           USERNAME: ${{ secrets.USERNAME }}
+#           DATABRICKS_BUNDLE_ENV: prod
+#         run: |
+#           # databricks bundle validate -t prod \
+#           #    --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID_WS_DEV }}" \
+#           #    --var="warehouse_id=${{ secrets.WAREHOUSE_ID_DEV }}"
 
-          # databricks bundle deploy -t prod \
-          #    --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID_WS_DEV }}" \
-          #    --var="warehouse_id=${{ secrets.WAREHOUSE_ID_DEV }}"
+#           # databricks bundle deploy -t prod \
+#           #    --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID_WS_DEV }}" \
+#           #    --var="warehouse_id=${{ secrets.WAREHOUSE_ID_DEV }}"
 
-          databricks bundle destroy -t prod \
-              --auto-approve \
-              --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID_WS_PROD }}" \
+#           # databricks bundle destroy -t prod \
+#           #     --auto-approve \
+#           #     --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID_WS_PROD }}" \
