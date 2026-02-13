@@ -37,9 +37,9 @@ jobs:
           DATABRICKS_BUNDLE_ENV: dev
         run: |
           databricks bundle validate -t dev \
-             --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID_WS_DEV }}"
+             --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID_WS_DEV }}" \
              --var="warehouse_id=${{ secrets.WAREHOUSE_ID_DEV }}"
 
           databricks bundle deploy -t dev \
-             --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID_WS_DEV }}"
+             --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID_WS_DEV }}" \
              --var="warehouse_id=${{ secrets.WAREHOUSE_ID_DEV }}"
