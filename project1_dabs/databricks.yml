@@ -24,6 +24,7 @@ variables:
     description: The warehouse to use
   service_principal_id:
     description: "The client ID of the service principal to run the job as"
+    default: "please-set-me-in-local-config_github_secrets"
 
 targets:
   dev:
