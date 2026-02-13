@@ -45,4 +45,5 @@ jobs:
           #    --var="warehouse_id=${{ secrets.WAREHOUSE_ID_DEV }}"
 
           databricks bundle destroy -t prod \
-             --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID_WS_DEV }}" \
+              --auto-approve \
+              --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID_WS_PROD }}" \
