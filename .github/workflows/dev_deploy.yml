@@ -29,38 +29,18 @@ jobs:
       
       - working-directory: ./project1_dabs # depending on the project to deploy
         env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST_DEV }}
           DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID_WS_DEV }}
           DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET_WS_DEV }}
+          WAREHOUSE_ID: ${{ secrets.WAREHOUSE_ID_DEV }}
+          USERNAME: ${{ secrets.USERNAME }}
           DATABRICKS_BUNDLE_ENV: dev
         run: |
-            databricks bundle validate -t dev
-            databricks bundle deploy -t dev
-           
-      # - name: Bundle deploy (jobs)
-      #   env:
-      #     DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
-      #     DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID_WS_DEV }}
-      #     DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
-      #     DATABRICKS_AUTH_TYPE: oauth-m2m
-      #     DATABRICKS_OAUTH_SCOPE: all-apis
-      #     BUNDLE_ENV: dev
-      #   run: |
-      #     set -euo pipefail
-      #     if [ -z "${WHEEL_LIBRARY_PATH:-}" ]; then
-      #       echo "WHEEL_LIBRARY_PATH is missing; upload step should have set it"
-      #       exit 2
-      #     fi
-      #     if [ -z "${BUNDLE_ENV:-}" ]; then
-      #       echo "BUNDLE_ENV is missing; upload step should have set it"
-      #       exit 2
-      #     fi
-      #     # Use the bundle's `ci` target because GitHub runners don't have a local CLI profile.
-      #     databricks bundle validate -t ci \
-      #       --var="ENV=${BUNDLE_ENV}" \
-      #       --var="WHEEL_LIBRARY_PATH=${WHEEL_LIBRARY_PATH}" \
-      #       --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID }}"
+          # Use the bundle's `ci` target because GitHub runners don't have a local CLI profile.
+          databricks bundle validate -t ci \
+             --var="ENV=${DATABRICKS_BUNDLE_ENV}" \
+             --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID_WS_DEV }}"
 
-      #     databricks bundle deploy -t ci \
-      #       --var="ENV=${BUNDLE_ENV}" \
-      #       --var="WHEEL_LIBRARY_PATH=${WHEEL_LIBRARY_PATH}" \
-      #       --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID }}"
+          databricks bundle deploy -t ci \
+             --var="ENV=${DATABRICKS_BUNDLE_ENV}" \
+             --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID_WS_DEV }}"
