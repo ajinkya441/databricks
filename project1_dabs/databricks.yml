@@ -54,3 +54,4 @@ targets:
     permissions:
       - user_name: ${workspace.current_user.userName} # user access
         level: CAN_MANAGE
+        
