@@ -36,11 +36,8 @@ jobs:
           USERNAME: ${{ secrets.USERNAME }}
           DATABRICKS_BUNDLE_ENV: dev
         run: |
-          # Use the bundle's `ci` target because GitHub runners don't have a local CLI profile.
-          databricks bundle validate -t ci \
-             --var="ENV=${DATABRICKS_BUNDLE_ENV}" \
+          databricks bundle validate -t dev \
              --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID_WS_DEV }}"
 
-          databricks bundle deploy -t ci \
-             --var="ENV=${DATABRICKS_BUNDLE_ENV}" \
+          databricks bundle deploy -t dev \
              --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID_WS_DEV }}"
