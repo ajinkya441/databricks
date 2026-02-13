@@ -36,14 +36,14 @@ jobs:
           USERNAME: ${{ secrets.USERNAME }}
           DATABRICKS_BUNDLE_ENV: dev
         run: |
-          databricks bundle validate -t dev \
-             --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID_WS_DEV }}" \
-             --var="warehouse_id=${{ secrets.WAREHOUSE_ID_DEV }}"
+          # databricks bundle validate -t dev \
+          #    --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID_WS_DEV }}" \
+          #    --var="warehouse_id=${{ secrets.WAREHOUSE_ID_DEV }}"
 
-          databricks bundle deploy -t dev \
-             --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID_WS_DEV }}" \
-             --var="warehouse_id=${{ secrets.WAREHOUSE_ID_DEV }}"
+          # databricks bundle deploy -t dev \
+          #    --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID_WS_DEV }}" \
+          #    --var="warehouse_id=${{ secrets.WAREHOUSE_ID_DEV }}"
 
-          # databricks bundle destroy -t dev \
-          #     --auto-approve \
-          #     --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID_WS_DEV }}" \
+          databricks bundle destroy -t dev \
+              --auto-approve \
+              --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID_WS_DEV }}" \
